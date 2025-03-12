@@ -18,6 +18,7 @@ Date: March 12, 2025
 How to Use the Script
 Basic Usage
 python file_splitter.py large_data_file.csv
+
 This will:
 
 Create a new directory named after your input file (e.g., large_data_file_split_20250312_123456/)
@@ -52,8 +53,6 @@ How to Install and Run
 Install Python Dependencies:
 pip install pandas openpyxl tqdm
 
-Save the Script:
-Save the provided code as file_splitter.py
 Run the Script:
 python file_splitter.py your_large_file.csv
 
