@@ -10,8 +10,16 @@ This script processes input CSV or Excel files by:
 5. Generating unique identifiers
 6. Outputting the processed data to a new file
 
-Author: Claude
+Author: Stefanos Tzortzoglou with Claude
 Date: March 12, 2025
+
+Requirements:
+- pandas
+- openpyxl
+- tqdm
+
+Run the script with: "python csv-excel-processor.py input_file.csv" or consider adjusting the chunk size for large files like this: "python csv-excel-processor.py input_file.csv --chunk-size 5000"
+
 """
 
 import pandas as pd
