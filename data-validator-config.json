@@ -1,0 +1,66 @@
+{
+  "ignore_columns": [
+    "tags"
+  ],
+  "data_types": {
+    "unique_id": "string",
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "ranges": {
+    "age": {
+      "min": 18,
+      "max": 100
+    },
+    "salary": {
+      "min": 0
+    },
+    "score": {
+      "min": 0,
+      "max": 100
+    }
+  },
+  "date_formats": {
+    "created_at": "YYYY-MM-DD",
+    "updated_at": "YYYY-MM-DD",
+    "signup_date": "MM/DD/YYYY"
+  },
+  "custom_rules": {
+    "email_format": {
+      "column": "email",
+      "type": "regex",
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "message": "Invalid email format"
+    },
+    "phone_format": {
+      "column": "phone",
+      "type": "regex",
+      "pattern": "^(\\+\\d{1,3}[- ]?)?\\(?\\d{3}\\)?[- ]?\\d{3}[- ]?\\d{4}$",
+      "message": "Invalid phone number format"
+    },
+    "valid_status": {
+      "column": "status",
+      "type": "enum",
+      "values": [
+        "active",
+        "inactive",
+        "pending",
+        "suspended"
+      ],
+      "message": "Status must be one of the allowed values"
+    },
+    "address_required_if_shipping": {
+      "column": "shipping_address",
+      "type": "dependency",
+      "depends_on": "requires_shipping",
+      "condition": "not_null",
+      "message": "Shipping address is required when shipping is needed"
+    },
+    "zip_code_format": {
+      "column": "zip_code",
+      "type": "regex",
+      "pattern": "^\\d{5}(-\\d{4})?$",
+      "message": "Invalid US ZIP code format"
+    }
+  }
+}
