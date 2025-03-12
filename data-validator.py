@@ -84,6 +84,7 @@ class DataValidator:
         self.issue_count = 0
         self.warnings = []
         self.errors = []
+        self.ignore_columns = self.config.get('ignore_columns', [])
         
     def _load_config(self) -> Dict:
         """Load validation rules from a configuration file."""
@@ -159,6 +160,14 @@ class DataValidator:
         except Exception as e:
             self.errors.append(f"Error reading raw CSV data: {str(e)}")
     
+    def skip_ignored_columns(self) -> None:
+        """Skip validation for columns specified in the ignore_columns list."""
+        for col in self.ignore_columns:
+            if col in self.column_names:
+                self.column_names.remove(col)
+                self.data.drop(columns=[col], inplace=True)
+                self.warnings.append(f"Column '{col}' is ignored as per configuration")
+
     def validate(self) -> Dict[str, Any]:
         """
         Run all validation checks and return a summary of results.
@@ -168,7 +177,10 @@ class DataValidator:
         """
         if not self.load_file():
             return self._generate_report()
-            
+        
+        # Skip ignored columns
+        self.skip_ignored_columns()
+        
         # Run all validation checks
         self.check_file_structure()
         self.check_duplicate_primary_keys()

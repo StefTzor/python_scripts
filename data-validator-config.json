@@ -1,6 +1,7 @@
 {
   "ignore_columns": [
-    "tags"
+    "campaign_tag",
+    "email"
   ],
   "data_types": {
     "unique_id": "string",
